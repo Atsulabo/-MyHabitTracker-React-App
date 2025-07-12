@@ -2,7 +2,15 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [input, setInput] = useState('');
+  const [habits, setHabits] = useState<string[]>([]);
+
+  const addHabit=()=>{
+    if (input.trim()){
+      setHabits([...habits, input]);
+      setInput('');
+    }
+  };
 
   return (
       <div className="skin">
@@ -12,15 +20,26 @@ function App() {
         </header>
         <form
           className="input-line"
+          onSubmit={(e)=>{
+            e.preventDefault();
+            addHabit();
+          }}
         >
           <input
             type="text"
-            value=""
-            placeholder="タスクを入力"
+            value={input}
+            onChange={(e)=>setInput(e.target.value)}
+            placeholder="習慣づけたい習慣を入力"
           />
-          <button>add</button>
+          <button onClick={addHabit}>add</button>
         </form>
-        <p className="empty-message">No habits yet. Start building your routine today!</p>
+        {habits.length == 0} ? (
+          <p className="empty-message">No habits yet. Start building your routine today!</p>
+        ) : (
+          <>
+          
+          </>
+        )
       </div>
   )
 }
