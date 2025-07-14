@@ -1,42 +1,79 @@
-#root {
-  max-width: 1280px;
+/* 背景とベース */
+body {
+  
+  padding: 0;
+  font-family: 'Helvetica', sans-serif;
+  background-color: #ffffff;
+  color: #4b2e2e; /* やさしい濃い茶色 */
+}
+#root{
+  margin: 0 auto;
+}
+
+/* 外枠 */
+.skin {
+  max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+/* ヘッダー */
+header h1 {
+  font-size: 2.2rem;
+  color: #e85d04; /* 元気なオレンジ */
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+header h2 {
+  font-size: 1.1rem;
+  color: #666;
+  text-align: center;
+  margin-top: 0.2rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* 入力フォーム */
+.input-line {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  gap: 0.5rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.input-line input {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 250px;
+  font-size: 1rem;
+  background-color: #fdf6f0; /* ややベージュ */
+  color: #333;
 }
 
-.card {
-  padding: 2em;
+.input-line button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #ff9f1c;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.read-the-docs {
-  color: #888;
+.input-line button:hover {
+  background-color: #e76f00;
+}
+
+/* 習慣リスト */
+.habit-line {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  font-size: 1rem;
+  color: #3e3e3e;
+}
+
+/* 空のときのメッセージ */
+.empty-message {
+  text-align: center;
+  color: #999;
+  margin-top: 2rem;
 }
