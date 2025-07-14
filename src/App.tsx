@@ -2,7 +2,9 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
+  //入力したのをフォームに反映する
   const [input, setInput] = useState('');
+  //習慣リストに入力→登録申請されたのを反映する
   const [habits, setHabits] = useState<string[]>([]);
 
   const addHabit=()=>{
@@ -33,15 +35,19 @@ function App() {
           />
           <button onClick={addHabit}>add</button>
         </form>
-        {habits.length == 0} ? (
+        {habits.length === 0 ? (
           <p className="empty-message">No habits yet. Start building your routine today!</p>
         ) : (
           <>
-          
+            {habits.map((habit, index)=>(
+              <div key={index} className="habit-line">
+                {habit}
+              </div>
+          ))}
           </>
-        )
+        )}
       </div>
-  )
+  );
 }
 
 export default App
