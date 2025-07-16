@@ -21,26 +21,32 @@ function App() {
     }
   };
 
-const getCurrentWeekDates = (): string[] => {
-  const today = new Date();
-  const weekDates: string[] = [];
+  // 曜日を固定で並べる
+const weekdays = ['月', '火', '水', '木', '金', '土', '日'];
 
-  // 日本語の曜日
-  const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+// 今日の曜日インデックス（0:日〜6:土）
+const today = new Date();
+const todayIndex = (today.getDay() + 6) % 7; // 日曜始まりを月曜始まりに補正
+
+// 月〜日順に日付を計算
+const getWeekDates = (): string[] => {
+  const base = new Date();
+  const dates: string[] = [];
 
   for (let i = 0; i < 7; i++) {
-    const date = new Date(today);
-    date.setDate(today.getDate() + i);
+    const d = new Date(base);
+    // 月曜を基準に各曜日を計算（今日の曜日からずらす）
+    d.setDate(base.getDate() - todayIndex + i);
 
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const weekday = weekdays[date.getDay()];
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
 
-    weekDates.push(`${month}/${day}（${weekday}）`);
+    dates.push(`${month}/${day}（${weekdays[i]}）`);
   }
 
-  return weekDates;
+  return dates;
 };
+
 
   // 🔸 トグルチェック
   const toggleCheck = (habit: string, day: string) => {
@@ -52,8 +58,8 @@ const getCurrentWeekDates = (): string[] => {
       },
     }));
   };
-  const weekDates = getCurrentWeekDates();
-  const todayStr = weekDates[0]; // 今日のセルにハイライトつけるなら
+  const weekDates = getWeekDates();
+  const todayStr = weekDates[todayIndex]; // 今日のセルにハイライトつけるなら
 
   return (
     <div className="skin">
@@ -87,7 +93,7 @@ const getCurrentWeekDates = (): string[] => {
               {weekDates.map((dateStr) => (
                 <th
                   key={dateStr}
-                  className={dateStr === weekDates[0] ? 'highlight' : ''}
+                  className={dateStr === weekDates[todayIndex] ? 'highlight' : ''}
                 >
                   {dateStr}
                 </th>
