@@ -41,7 +41,7 @@ const getWeekDates = (): string[] => {
     const month = String(d.getMonth() + 1).padStart(2, '0');
     const day = String(d.getDate()).padStart(2, '0');
 
-    dates.push(`${month}/${day}（${weekdays[i]}）`);
+    dates.push(`${month}/${day} \n（${weekdays[i]}）`);
   }
 
   return dates;
@@ -93,7 +93,7 @@ const getWeekDates = (): string[] => {
               {weekDates.map((dateStr) => (
                 <th
                   key={dateStr}
-                  className={dateStr === weekDates[todayIndex] ? 'highlight' : ''}
+                  className={dateStr === weekDates[todayIndex] ? 'highlight,habit-column' : 'habit-column'}
                 >
                   {dateStr}
                 </th>
@@ -103,7 +103,7 @@ const getWeekDates = (): string[] => {
           <tbody>
             {habits.map(habit => (
               <tr key={habit}>
-                <td>{habit}</td>
+                <td className="habit-column" title={habit}>{habit}</td>
                 {weekDates.map(dateStr => (
                   <td key={`${habit}-${dateStr}`}>
                     <input

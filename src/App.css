@@ -12,7 +12,6 @@ body {
 
 /* 外枠 */
 .skin {
-  max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -80,4 +79,54 @@ header h2 {
 
 .highlight {
   background-color: #ffe8a1;
+}
+
+.habit-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.habit-table th,
+.habit-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  min-width: 60px;
+}
+.habit-table th{
+  white-space: pre-line;  /* \n を改行として扱う */
+}
+
+.habit-column {
+  min-width: 180px;
+  max-width: 300px;
+  text-align: left;
+  font-weight: bold;
+  padding-left: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 200px;
+  max-width: 400px;
+}
+@media (max-width: 768px) {
+  .habit-column {
+    white-space: normal;      /* スマホでは折り返しOKにする */
+    max-width: none;          /* 最大幅制限解除 */
+  }
+}
+
+.habit-table thead {
+  background-color: #f7f7f7;
+}
+
+.habit-table input[type="checkbox"] {
+  transform: scale(1.2); /* ちょっと大きくする */
+  cursor: pointer;
+}
+
+.habit-table .today {
+  background-color: #ffeeba; /* 今日の列を黄色っぽくハイライト */
 }
