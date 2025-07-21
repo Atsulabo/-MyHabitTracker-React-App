@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
   const [input, setInput] = useState('');
   const [habits, setHabits] = useState<string[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   // チェック状態管理
   type HabitRecord = {
@@ -60,6 +61,29 @@ const getWeekDates = (): string[] => {
   };
   const weekDates = getWeekDates();
   const todayStr = weekDates[todayIndex]; // 今日のセルにハイライトつけるなら
+  //副作用
+  useEffect(() => {
+    const savedHabits = localStorage.getItem('habits');
+    const savedRecords = localStorage.getItem('records');
+
+    if (savedHabits) {
+      setHabits(JSON.parse(savedHabits));
+    }
+
+    if (savedRecords) {
+      setRecords(JSON.parse(savedRecords));
+    }
+    setLoaded(true); // ← 読み込み完了フラグを立てる
+  }, []);
+
+  //
+  useEffect(() => {
+    if(loaded){
+      localStorage.setItem('habits', JSON.stringify(habits));
+      localStorage.setItem('records', JSON.stringify(record));
+    }
+}, [habits,record,loaded]);
+
 
   return (
     <div className="skin">
