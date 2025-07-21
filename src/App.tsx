@@ -60,7 +60,6 @@ const getWeekDates = (): string[] => {
     }));
   };
   const weekDates = getWeekDates();
-  const todayStr = weekDates[todayIndex]; // 今日のセルにハイライトつけるなら
   //副作用
   useEffect(() => {
     const savedHabits = localStorage.getItem('habits');
@@ -114,10 +113,10 @@ const getWeekDates = (): string[] => {
           <thead>
             <tr>
               <th>Habit</th>
-              {weekDates.map((dateStr) => (
+              {weekDates.map((dateStr, i) => (
                 <th
                   key={dateStr}
-                  className={dateStr === weekDates[todayIndex] ? 'highlight,habit-column' : 'habit-column'}
+                  className={`habit-column${i === todayIndex ? ' highlight' : ''}`}
                 >
                   {dateStr}
                 </th>
@@ -128,8 +127,11 @@ const getWeekDates = (): string[] => {
             {habits.map(habit => (
               <tr key={habit}>
                 <td className="habit-column" title={habit}>{habit}</td>
-                {weekDates.map(dateStr => (
-                  <td key={`${habit}-${dateStr}`}>
+                {weekDates.map((dateStr, i) => (
+                  <td
+                    key={`${habit}-${dateStr}`}
+                    className={i === todayIndex ? 'highlight' : ''}
+                  >
                     <input
                       type="checkbox"
                       checked={record[habit]?.[dateStr] || false}
